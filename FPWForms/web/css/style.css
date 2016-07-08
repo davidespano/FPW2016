@@ -14,19 +14,19 @@ body {
 }
 
 .sidebar1 {
-    background-color: #ccff99;
+    /*background-color: #ccff99;*/
     float: left;
     width: 20%;
 }
 
 .sidebar2 {
-    background-color: #ffff99;
+    /*background-color: #ffff99;*/
     float: right;
     width: 20%;
 }
 
 .content {
-    background-color: #ff9966;
+    /*background-color: #ff9966;*/
     margin-left: 20%;
     margin-right: 20%;
 }
@@ -43,6 +43,12 @@ header {
 footer {
     background-color: #003399;
     color: white;
+}
+
+.page {
+    width: 768px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .frame {
