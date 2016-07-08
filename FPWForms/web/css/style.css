@@ -13,6 +13,38 @@ body {
     color: black;
 }
 
+.sidebar1 {
+    background-color: #ccff99;
+    float: left;
+    width: 20%;
+}
+
+.sidebar2 {
+    background-color: #ffff99;
+    float: right;
+    width: 20%;
+}
+
+.content {
+    background-color: #ff9966;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.clear {
+    clear: both;
+}
+
+header {
+    background-color: #003399;
+    color: white;
+}
+
+footer {
+    background-color: #003399;
+    color: white;
+}
+
 .frame {
     border: 5px solid #003399;
     background-color: #99ccff;
