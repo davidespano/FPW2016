@@ -17,7 +17,7 @@
     <body>
         <h1>Login</h1>
         
-        <c:if test="${! autenticato}">
+        <c:if test="${ mostraErrori == true}">
             <p>
             Username o password non corretti. 
             </p>

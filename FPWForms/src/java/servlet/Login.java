@@ -38,23 +38,32 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        
+        boolean mostraErrori = false;
         String username = request.getParameter("username");
-        if(username == null){
-            username = "";
-        }
+        
         
         String password = request.getParameter("password");
-        if(password == null){
-            password = "";
+ 
+        User usr = null;
+        if(username == null && password == null){
+            mostraErrori = false;
+        }else{
+            usr = Db.getInstance().getUser(username, password);
+            mostraErrori = (usr == null);
         }
         
-        User usr = Db.getInstance().getUser(username, password);
+        // passo informazione dalla servlet alla jsp
+        request.setAttribute("mostraErrori", mostraErrori);
         
-        // carica la jsp login.jsp all'interno della cartella jsp
-        request.getRequestDispatcher("jsp/login.jsp")
+        if(usr == null){
+            // carica la jsp login.jsp all'interno della cartella jsp
+            request.getRequestDispatcher("jsp/login.jsp")
                 .forward(request, response);
+        }else{
+            // carico la home dell'utente
+            request.getRequestDispatcher("jsp/homeUtente.jsp")
+                .forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
