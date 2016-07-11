@@ -52,39 +52,9 @@ public class Login extends HttpServlet {
         
         User usr = Db.getInstance().getUser(username, password);
         
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            
-            if(usr != null){
-                out.println("<h1>Ciao  " + usr.getUsername() + "</h1>");
-            }else{
-                out.println("<h1> Autenticazione errata !!! </h1>");
-            }
-            
-            
-            /* cicla su tutte le chiavi nella richiesta HTTP 
-           e legge i valori
-        */
-        String k = null;
-        String v = null;
-        Enumeration e = request.getParameterNames();
-        while(e.hasMoreElements()){
-            k = (String) e.nextElement();
-            v = request.getParameter(k);
-            out.println("parametro: " + k + " valore " + v + "<br>");
-        }
-            
-            
-            out.println("</body>");
-            out.println("</html>");
-        }
+        // carica la jsp login.jsp all'interno della cartella jsp
+        request.getRequestDispatcher("jsp/login.jsp")
+                .forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
