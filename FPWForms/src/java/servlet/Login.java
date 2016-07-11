@@ -61,7 +61,13 @@ public class Login extends HttpServlet {
             out.println("<title>Servlet Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Ciao da Davide Login at " + request.getContextPath() + "</h1>");
+            
+            if(usr != null){
+                out.println("<h1>Ciao  " + usr.getUsername() + "</h1>");
+            }else{
+                out.println("<h1> Autenticazione errata !!! </h1>");
+            }
+            
             
             /* cicla su tutte le chiavi nella richiesta HTTP 
            e legge i valori
