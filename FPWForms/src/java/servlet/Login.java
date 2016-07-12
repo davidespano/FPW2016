@@ -40,21 +40,31 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(true);
-        
         boolean mostraErrori = false;
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
- 
+        String cmd = request.getParameter("cmd");
+        
         User usr = null;
         if(username == null && password == null){
             mostraErrori = false;
         }else{
             usr = Db.getInstance().getUser(username, password);
+            session.setAttribute("user", usr);
             mostraErrori = (usr == null);
         }
         
         if(usr == null){
             usr = (User) session.getAttribute("user");
+        }
+       
+        
+        if(cmd != null && cmd.equals("logout")){
+            // l'utente ha richiesto il logout
+            session.invalidate();
+            usr = null;
+            mostraErrori = false;
         }
         
         // passo informazione dalla servlet alla jsp
@@ -65,7 +75,6 @@ public class Login extends HttpServlet {
             request.getRequestDispatcher("jsp/login.jsp")
                 .forward(request, response);
         }else{
-            session.setAttribute("user", usr);
             // carico la home dell'utente
             request.getRequestDispatcher("jsp/homeUtente.jsp")
                 .forward(request, response);

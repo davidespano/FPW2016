@@ -29,6 +29,12 @@ and open the template in the editor.
             <nav class="sidebar1">
                 <h2>Esempi di collegamento</h2>
                 <ul>
+                    <li>
+                        <a href="loginServlet.html?cmd=logout" 
+                           title="Termina la sessione utente">
+                            Logout
+                        </a>
+                    </li>
                     <li> 
                         <a href="http://people.unica.it/davidespano/" target="_blank" 
                            title="selezionalo per aprire la pagina su un nuovo tab">
