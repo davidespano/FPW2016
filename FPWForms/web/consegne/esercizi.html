@@ -6,13 +6,27 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Esercizi FPW</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/esercitazioni.css" />
     </head>
     <body>
+        <nav>
+            <h1>Sommario</h1>
+            <ul>
+                <li>
+                    <a href="#es1">Prima esercitazione</a>
+                   
+                </li>
+                
+                <li>
+                     <a href="#es2">Seconda esercitazione</a>
+                </li>
+            </ul>
+        </nav>
         <article>
-            <h1>Prima esercitazione</h1>
+            <h1 id="es1">Prima esercitazione (entro 10 luglio 2016)</h1>
             
             <h2>Esercizio su html</h2>
             <p>
@@ -51,6 +65,55 @@ and open the template in the editor.
                     esempio da Facebook</li>
             </ul>
         </article>
-        
+        <article>
+            <h1 id="es2">Seconda esercitazione (entro 17 luglio 2016)</h1>
+            <h2>Login &amp; logout</h2>
+            <p>
+                In questo esercizio il vostro scopo sarà quello di creare
+                un semplice meccanismo di login per il social network. 
+                Lo schema è riassunto dalla figura seguente:
+            </p>
+              <img src="../img/lavagna2.jpg" alt="immagine della lavagna a lezione" 
+                 width="1024"
+                 />
+              <p>
+                  L'utente deve cioè potersi autenticare accedendo alla URL
+                  login.html della vostra applicazione. Nel caso inserisca le 
+                  credenziali corrette, verrà visualizzata la pagina (jsp) con 
+                  i post (per il momento va bene che questi ultimi siano statici).
+                  Nel caso di inserimento di credenziali errate, deve essere 
+                  mostrato il form di login con un messaggio di errore. 
+              </p>
+              <p>
+                  La pagina dei post deve contenere un collegamento alla URl logout.html.
+                  Nel caso l'utente segue questo collegamento, gli deve essere 
+                  mostrata una pagina di conferma dell'azione (p.e. Vuoi veramente 
+                  uscire dall'applicazione? Si/No). Nel caso di conferma, la 
+                  sessione utente deve essere terminata e deve essere mostrato di
+                  nuovo la pagina di login. In caso negativo, si devono mostrare
+                  di nuovo i post. 
+              </p>
+              <p>
+                  <strong>
+                      N.B. la pagina di conferma deve essere mostrata solo 
+                      se l'utente era già autenticato. 
+                  </strong>
+              </p>
+              
+              <p>
+                  Dal punto di vista del codice mi aspetto che il vostro 
+                  progetto contenga:
+              </p>
+              <ul>
+                  <li>Una servlet Login.html che risponda alla url login.html</li>
+                  <li>Una servlet Logout.html che risponda alla url logout.html</li>
+                  <li>Una jsp che contenga il form di login</li>
+                  <li>Una jsp che contenga i post dell'utente (statici,
+                      cioè direttamente scritti solo con html), con un link 
+                      per effettuare la logout. 
+                  </li>
+                  <li>Una jsp che contenga il form di conferma del logout</li>
+              </ul>
+        </article>
     </body>
 </html>
