@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Db;
 import model.User;
 
@@ -38,10 +39,10 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        HttpSession session = request.getSession(true);
+        
         boolean mostraErrori = false;
         String username = request.getParameter("username");
-        
-        
         String password = request.getParameter("password");
  
         User usr = null;
@@ -52,6 +53,10 @@ public class Login extends HttpServlet {
             mostraErrori = (usr == null);
         }
         
+        if(usr == null){
+            usr = (User) session.getAttribute("user");
+        }
+        
         // passo informazione dalla servlet alla jsp
         request.setAttribute("mostraErrori", mostraErrori);
         
@@ -60,6 +65,7 @@ public class Login extends HttpServlet {
             request.getRequestDispatcher("jsp/login.jsp")
                 .forward(request, response);
         }else{
+            session.setAttribute("user", usr);
             // carico la home dell'utente
             request.getRequestDispatcher("jsp/homeUtente.jsp")
                 .forward(request, response);
