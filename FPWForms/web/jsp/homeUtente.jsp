@@ -23,38 +23,14 @@ and open the template in the editor.
     </head>
     <body>
         <div class="page">
-            <header>
-                <h1>FPW Forms</h1>
-            </header>
-            <nav class="sidebar1">
-                <h2>Esempi di collegamento</h2>
-                <ul>
-                    <li>
-                        <a href="loginServlet.html?cmd=logout" 
-                           title="Termina la sessione utente">
-                            Logout
-                        </a>
-                    </li>
-                    <li> 
-                        <a href="http://people.unica.it/davidespano/" target="_blank" 
-                           title="selezionalo per aprire la pagina su un nuovo tab">
-                            Home page del docente
-                        </a>
-                    </li>
-                    <li>
-                        <a href="prova-collegamento.html">
-                            Seconda pagina del sito
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="sidebar2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis lacus vitae metus pretium pharetra vel et mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas mollis vulputate quam nec accumsan. Cras eu ligula scelerisque, finibus massa in, porta diam. Sed malesuada, felis et bibendum hendrerit, erat quam ultricies nulla, a rhoncus augue massa nec ligula. Pellentesque eleifend dolor et nisl suscipit, in semper est eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                Suspendisse id purus placerat, vehicula nulla eget, egestas dolor. Nunc tempus auctor arcu id consectetur. Sed pharetra ligula a rhoncus porttitor. Nunc commodo cursus diam. Pellentesque ultricies feugiat justo, id ullamcorper tellus tincidunt eu. Proin facilisis, velit ac aliquet mollis, neque magna vestibulum leo, eu aliquam risus arcu a erat. Morbi pharetra bibendum tortor ac vulputate. Aenean facilisis fringilla nibh ac sodales. Sed molestie neque dolor, ac sagittis nulla sodales non. Integer imperdiet lacus id libero consectetur, sed volutpat ipsum sodales. Aenean aliquet nibh sed diam facilisis, sed pellentesque lacus sagittis. Aliquam aliquet gravida est, sit amet fringilla purus interdum vitae.
-            </div>
+            
+            <jsp:include page="include/header.jsp" />
+            <jsp:include page="include/sidebar1.jsp"/> 
+            <jsp:include page="include/sidebar2.jsp" />
+            
             <div class="content">
                 <article>
-                    <h2 id="primo-titolo" title="Questo è un titolo">Benvenuto nel sito FPWForm</h2>
+                    <h2 id="primo-titolo" title="Questo è un titolo">Benvenuto ${usr.getUsername()}</h2>
                     <p>
                         In questo sito potrai creare i tuoi questionari da sottporre 
                         a diversi utenti sul web. 
@@ -115,10 +91,8 @@ and open the template in the editor.
                     </table>
                 </article>
             </div>
-            <div class="clear"></div>
-            <footer>
-                    <p>Ultimo aggiornamento 7 luglio 2016</p>
-            </footer>
+            
+            <jsp:include page="include/footer.jsp"/>        
         </div>
     </body>
 </html>

@@ -29,10 +29,22 @@ public class Db {
         String usrFalso = "davide";
         String pswFalso = "FPW";
         
+        String usrFalso2 ="giovanni";
+        String pswFalso2 ="nuovo";
+        
         if(username.equals(usrFalso) && 
                 password.equals(pswFalso)){
             User usr = new User();
             usr.setId(1);
+            usr.setUsername(username);
+            usr.setPassword(password);
+            return usr;
+        }
+        
+        if(username.equals(usrFalso2) &&
+                password.equals(pswFalso2)){
+            User usr = new User();
+            usr.setId(2);
             usr.setUsername(username);
             usr.setPassword(password);
             return usr;

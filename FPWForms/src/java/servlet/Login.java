@@ -77,6 +77,7 @@ public class Login extends HttpServlet {
                 .forward(request, response);
         }else{
             // carico la home dell'utente
+            request.setAttribute("usr", usr);
             request.getRequestDispatcher("jsp/homeUtente.jsp")
                 .forward(request, response);
         }
