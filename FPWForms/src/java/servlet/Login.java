@@ -38,7 +38,8 @@ public class Login extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+       
         HttpSession session = request.getSession(true);
         boolean mostraErrori = false;
         
