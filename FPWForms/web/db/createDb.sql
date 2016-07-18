@@ -11,3 +11,5 @@ values
 (default, 'davide', 'FPW', 'Davide', 'Spano'),
 (default, 'giovanni', 'nuovo', 'Giovanni', 'Nuovo'),
 (default, 'tizio', 'caio', 'Tizio', 'Caio');
+
+select * from appUser ;
