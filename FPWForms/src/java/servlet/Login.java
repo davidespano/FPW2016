@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
         if(username == null && password == null){
             mostraErrori = false;
         }else{
-            usr = Db.getInstance().getUser(username, password);
+            usr = Db.getInstance().getUserVer2(username, password);
             session.setAttribute("user", usr);
             mostraErrori = (usr == null);
         }
