@@ -134,5 +134,72 @@ and open the template in the editor.
                   </li>
               </ol>
         </article>
+        <article>
+            <h2>Terza esercitazione</h2>
+            <p>
+                In questo esercizio il vostro scopo sarà quello di visualizzare
+                i post presenti nel sistema e permettere all'utente di aggiungerne
+                di nuovi.
+            </p>
+            <p>
+                Per fare questo vi viene richiesto di:
+            </p>
+            <ul>
+                  <li>
+                      Aggiungere al proprio db una tabella che descriva i post.
+                      Aggiungete anche le query per la creazione e l'inserimento
+                      dati nel file creaDb.sql
+                  </li>
+                  <li>
+                      Aggiungere nel package model una classe che descriva i Post
+                  </li>
+                  <li>
+                      Aggiungere nella classe Db tutti i metodi necessari per
+                      caricare i Post dal database.
+                  </li>
+                  <li>
+                      Creare una Servlet Posts che risponde alla url posts.html
+                      Questa servlet deve:
+                      <ul>
+                          <li>
+                              Mostrare una post.jsp che contiene il form per
+                              aggiungere i post ed una lista di post
+                          </li>
+                          <li>
+                              Nel caso non riceva alcun comando, deve caricare
+                              dal db la lista dei post e passarla a post.jsp
+                          </li>
+                          <li>
+                              Nel caso riceva un comando di inserimento di un 
+                              nuovo post, deve prima salvare il nuovo post nel db,
+                              caricare la lista dei post e passarla a post.jsp
+                          </li>
+                      </ul>
+                       
+                  </li>
+                  <li>Plus: caricare i post in in ordine inverso rispetto alla
+                      loro creazione
+                  </li>
+              </ul>
+            <p>
+                  <strong>
+                      Per consegnare seguite questi passi: 
+                  </strong>
+              </p>
+              <ol>
+                  <li>
+                      <strong>Effettuate una clean del progetto</strong>. 
+                      Serve per rimuovere i file compilati ed evitare che 
+                      vengano messi in quarantena dal gestore di mail per 
+                      evitare che ci siano virus. Fate click destro sul progetto
+                      e selezionate Clean.
+                  </li>
+                  <li>
+                      <strong>Create un pacchetto zip dell'intero progetto ed
+                      inviatemelo per email.</strong> Come oggetto potete usare 
+                      [FPW] Consegna seconda esercitazione
+                  </li>
+              </ol>
+        </article>
     </body>
 </html>
