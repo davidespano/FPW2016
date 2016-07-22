@@ -98,7 +98,14 @@ public class EditForm extends HttpServlet {
                     // domanda
                     Form f = new Form();
                     f.setId(formId);
-                    Db.getInstance().addQuestion(f);
+                    Db.getInstance().addDefaultQuestion(f);
+                    
+                } else if(cmd.equals("addOption")){
+                    Question q = new Question();
+                    q.setId(Integer.parseInt(request.getParameter("questionId")));
+                    Option o = new Option();
+                    o.setValue(request.getParameter("optionValue"));
+                    Db.getInstance().addOption(q, o);
                     
                 }
             }

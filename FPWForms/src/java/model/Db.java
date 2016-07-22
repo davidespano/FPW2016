@@ -170,7 +170,7 @@ public class Db {
         return false;
     }
 
-    public boolean addQuestion(Form f) {
+    public boolean addDefaultQuestion(Form f) {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -220,12 +220,46 @@ public class Db {
 
         return false;
     }
+    
+    public boolean addOption(Question q, Option o){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try { 
+            conn = DriverManager.getConnection(
+                    dbConnectionUrl,
+                    dbConnectionUser,
+                    dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                "insert into qoption (id, ovalue, question_id) " +
+                 "values (default, ?, ?)");
+            stmt.setString(1, o.getValue());
+            stmt.setInt(2, q.getId());
+            
+            int rows = stmt.executeUpdate();
+            return rows == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Db.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return false;
+    }
 
     public int createNewForm(User usr) {
         Connection conn = null;
         PreparedStatement stmt = null;
-        PreparedStatement stmt2 = null;
-        PreparedStatement stmt3 = null;
         try {
             conn = DriverManager.getConnection(
                     dbConnectionUrl,
@@ -258,14 +292,6 @@ public class Db {
             try {
                 if (stmt != null) {
                     stmt.close();
-                }
-
-                if (stmt2 != null) {
-                    stmt2.close();
-                }
-
-                if (stmt3 != null) {
-                    stmt3.close();
                 }
 
                 if (conn != null) {
@@ -303,7 +329,7 @@ public class Db {
                     + "join question on form.id = question.FORM_ID "
                     + "join qOption on qOption.QUESTION_ID = question.id "
                     + "where form.id = ? "
-                    + "order by question.qOrder");
+                    + "order by question.qOrder, qoption.id");
             stmt.setInt(1, id);
             List<Form> forms = getFormBySql(stmt, conn);
 
@@ -658,4 +684,5 @@ public class Db {
 
         return false;
     }
+    
 }

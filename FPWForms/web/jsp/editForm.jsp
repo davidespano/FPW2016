@@ -126,7 +126,7 @@
                                placeholder="Valore della nuova opzione"
                                class="largeInput"/> 
                         <button type="submit" name="cmd" class="save"
-                                value="newOption">
+                                value="addOption">
                             <img src="img/floppy.png" alt="Aggiungi nuova opzione" 
                                  width="24" height="24" />
                         </button>
