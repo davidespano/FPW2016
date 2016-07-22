@@ -135,7 +135,7 @@
                 <h3>Nuova domanda</h3>
                 <form action="editForm.html" method="post">
                     <input type="hidden" name="formId" value="${form.getId()}"/>
-                    <button class="large" type="submit" name="login" id="login">Aggiungi</button>
+                    <button class="large" type="submit" name="cmd" value="addQuestion" id="addQuestion">Aggiungi</button>
                 </form>
 
             </div>

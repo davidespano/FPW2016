@@ -92,6 +92,14 @@ public class EditForm extends HttpServlet {
                     o.setId(Integer.parseInt(
                             request.getParameter("optionId")));
                     Db.getInstance().updateOption(o);
+                    
+                } else if(cmd.equals("addQuestion")){
+                    // l'utente ha premuto il pulsante per aggiungere una nuova 
+                    // domanda
+                    Form f = new Form();
+                    f.setId(formId);
+                    Db.getInstance().addQuestion(f);
+                    
                 }
             }
             
