@@ -449,6 +449,54 @@ public class Db {
 
     }
     
+    public User getUserByUsername(String username){
+        Connection conn = null;
+        User user = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager
+                    .getConnection(
+                            dbConnectionUrl,
+                            dbConnectionUser, 
+                            dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                    "select * from appUser where "
+                            + "username = ?"
+            );
+            
+            stmt.setString(1, username);
+            
+            ResultSet set = stmt.executeQuery();
+            
+            while(set.next()){
+                user = new User();
+                user.setId(set.getInt("id"));
+                user.setUsername(set.getString("username"));
+                user.setPassword(set.getString("password"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } finally{
+            try{
+                if(stmt != null){
+                    stmt.close();
+                }
+                
+                if(conn != null){
+                    conn.close();
+                }
+            } catch(SQLException ex){
+                Logger.getLogger(Db.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return user;
+
+    }
+    
     private List<Form> getFormBySql(PreparedStatement stmt, Connection conn) throws SQLException{
         List<Form> forms = new ArrayList<>();
         

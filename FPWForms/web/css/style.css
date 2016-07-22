@@ -136,6 +136,14 @@ button.save{
     display: block;
 }
 
+.ok {
+    color: forestgreen;
+}
+
+.error {
+    color: crimson;
+}
+
 
 
  
