@@ -22,8 +22,8 @@ import model.User;
  *
  * @author davide
  */
-@WebServlet(name = "ListaForm", urlPatterns = {"/listaForm.html"})
-public class ListaForm extends HttpServlet {
+@WebServlet(name = "FormList", urlPatterns = {"/formList.html"})
+public class FormList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +37,8 @@ public class ListaForm extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+       
         HttpSession session = request.getSession();
         User usr = (User) session.getAttribute("user");
         
@@ -57,7 +59,7 @@ public class ListaForm extends HttpServlet {
                 Form form = Db.getInstance().getFormById(formId);
                 request.setAttribute("user", usr);
                 request.setAttribute("form", form);
-                request.getRequestDispatcher("jsp/modificaForm.jsp")
+                request.getRequestDispatcher("jsp/editForm.jsp")
                 .forward(request, response);
                 return;
             }
@@ -66,7 +68,7 @@ public class ListaForm extends HttpServlet {
         List<Form> forms = Db.getInstance().getFormsByUser(usr);
         request.setAttribute("user", usr);
         request.setAttribute("forms", forms);
-        request.getRequestDispatcher("jsp/listaForm.jsp")
+        request.getRequestDispatcher("jsp/formList.jsp")
                 .forward(request, response);
         
     }

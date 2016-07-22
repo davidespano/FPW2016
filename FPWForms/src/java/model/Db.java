@@ -48,6 +48,81 @@ public class Db {
         return singleton;
     }
     
+    public boolean updateForm(Form f){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(
+                    dbConnectionUrl,
+                    dbConnectionUser,
+                    dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                    "update form set title= ? "
+                  + "where id = ? ");
+            stmt.setString(1, f.getTitle());
+            stmt.setInt(2, f.getId());
+            
+            int rows = stmt.executeUpdate();
+            
+            return rows == 1;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                if(stmt != null){
+                    stmt.close();
+                }
+
+                if(conn != null){
+                    conn.close();
+                }
+            } catch(SQLException ex){
+                Logger.getLogger(Db.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean updateQuestion(Form f){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(
+                    dbConnectionUrl,
+                    dbConnectionUser,
+                    dbConnectionPsw);
+            
+            
+            int rows = stmt.executeUpdate();
+            
+            return rows == 1;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                if(stmt != null){
+                    stmt.close();
+                }
+
+                if(conn != null){
+                    conn.close();
+                }
+            } catch(SQLException ex){
+                Logger.getLogger(Db.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return false;
+    }
+    
+    
+    
+    
     public int createNewForm(User usr){
         Connection conn = null;
         PreparedStatement stmt = null;

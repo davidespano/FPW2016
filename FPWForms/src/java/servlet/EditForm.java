@@ -13,14 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Db;
+import model.Form;
 import model.User;
 
 /**
  *
  * @author davide
  */
-@WebServlet(name = "Login", urlPatterns = {"/loginServlet.html"})
-public class Login extends HttpServlet {
+@WebServlet(name = "EditForm", urlPatterns = {"/editForm.html"})
+public class EditForm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,52 +32,48 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(
-            HttpServletRequest request, 
-            HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
        
-        HttpSession session = request.getSession(true);
-        boolean mostraErrori = false;
-        
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String cmd = request.getParameter("cmd");
-        
-        User usr = null;
-        if(username == null && password == null){
-            mostraErrori = false;
-        }else{
-            usr = Db.getInstance().getUserVer2(username, password);
-            session.setAttribute("user", usr);
-            mostraErrori = (usr == null);
-        }
+        HttpSession session = request.getSession();
+        User usr = (User) session.getAttribute("user");
         
         if(usr == null){
-            usr = (User) session.getAttribute("user");
-        }
-       
-        
-        if(cmd != null && cmd.equals("logout")){
-            // l'utente ha richiesto il logout
-            session.invalidate();
-            usr = null;
-            mostraErrori = false;
-        }
-        
-        // passo informazione dalla servlet alla jsp
-        request.setAttribute("mostraErrori", mostraErrori);
-        
-        if(usr == null){
+            // utente non e' autenticato
             // carica la jsp login.jsp all'interno della cartella jsp
             request.getRequestDispatcher("jsp/login.jsp")
                 .forward(request, response);
-        }else{
-            // carico la home dell'utente
-            response.sendRedirect("formList.html");
+            return;
         }
+        
+        if(request.getParameter("formId") != null){
+            int formId = Integer.parseInt(request.getParameter("formId"));
+            
+            if(request.getParameter("cmd") != null){
+                String cmd = request.getParameter("cmd");
+                if(cmd.equals("formTitle")){
+                    // l'utente ha premuto il pulsante per modificare
+                    // i dati del form (il titolo). Effettuo l'update
+                    // sul database
+                    Form f = new Form();
+                    f.setId(formId);
+                    f.setTitle(request.getParameter("formTitle"));
+                    
+                }
+            }
+            
+            Form form = Db.getInstance().getFormById(formId);
+            request.setAttribute("form", form);
+            request.getRequestDispatcher("jsp/editForm.jsp")
+                .forward(request, response);
+            return;
+        }
+        
+        // non ho l'id del form, faccio una redirect alla pagina 
+        // con la lista dei form
+        response.sendRedirect("formList.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,8 +86,7 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, 
-            HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -104,8 +100,7 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, 
-            HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

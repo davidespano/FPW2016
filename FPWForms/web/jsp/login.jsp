@@ -35,10 +35,10 @@
 
             <form method="post" action="loginServlet.html">
                 <label for="username"> Nome utente: </label>
-                <input type="text" name="username" id="username" placeholder="davide">
+                <input class="largeInput" type="text" name="username" id="username" placeholder="davide">
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password">
-                <button type="submit" name="login" id="login">Login</button>
+                <input class="largeInput" type="password" name="password" id="password">
+                <button class="large" type="submit" name="login" id="login">Login</button>
             </form>
             </div>
             

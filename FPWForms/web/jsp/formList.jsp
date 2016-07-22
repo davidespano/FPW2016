@@ -30,14 +30,14 @@
                 <ul>
                     <c:forEach items="${forms}" var="form">
                         <li>
-                            <a href="modificaForm.html?formId=${form.getId()}">
+                            <a href="editForm.html?formId=${form.getId()}">
                                 ${form.getTitle()}
                             </a>
                         </li>
                         
                     </c:forEach>
                         <li>
-                            <a href="listaForm.html?cmd=new">Nuovo form</a>
+                            <a href="formList.html?cmd=new">Nuovo form</a>
                         </li>
                 </ul>
     
