@@ -31,15 +31,21 @@
 
            
 
-            <form method="post" action="loginServlet.html">
-                <label for="username"> Nome utente: </label>
-                <input class="largeInput" type="text" name="username" id="username" placeholder="davide">
+            <form method="post" action="register.html">
+                <label for="name"> Nome: </label>
+                <input class="largeInput" type="text" name="name" id="name">
+                <label for="surname"> Cognome </label>
+                <input class="largeInput" type="text" name="surname" id="surname">
+                <label for="username"> Username: </label>
+                <input class="largeInput" type="text" name="username" id="username">
                 <p id="checkUsername" >Username Ok</p>
                 <label for="password1">Password:</label>
                 <input class="largeInput" type="password" name="password1" id="password1">
-                <label for="password1">Ripeti la password</label>
+                <label for="password1">Ripeti la password:</label>
                 <input class="largeInput" type="password" name="password2" id="password2">
-                <button class="large" type="submit" name="register" id="register">Registrati</button>
+                <p id="checkPassword" >Le due password non coincidono</p>
+                <button class="large" type="submit" 
+                        name="cmd" value="registration" id="register">Registrati</button>
             </form>
             </div>
             

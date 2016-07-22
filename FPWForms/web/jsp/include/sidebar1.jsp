@@ -14,6 +14,12 @@
                 Logout
             </a>
         </li>
+        <li> 
+            <a href="register.html" 
+               title="Registrati al sito">
+                Registrati
+            </a>
+        </li>
         <li>
             <a href="formList.html" 
                title="Visualizza l'elenco dei form">

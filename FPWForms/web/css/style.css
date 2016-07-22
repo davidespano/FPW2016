@@ -127,6 +127,10 @@ button.large{
     color: white;
 }
 
+button.large:disabled{
+    background-color: gray;
+}
+
 button.save{
     background-color: white;
     border: 3px solid darkblue;

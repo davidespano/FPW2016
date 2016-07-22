@@ -49,6 +49,47 @@ public class Db {
         return singleton;
     }
 
+    public boolean createUser(User usr){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(
+                    dbConnectionUrl,
+                    dbConnectionUser,
+                    dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                    "insert into appUser (id, username, password, firstname, surname) "
+                  + "values (default, ?, ?, ?, ?)");
+            stmt.setString(1, usr.getUsername());
+            stmt.setString(2, usr.getPassword());
+            stmt.setString(3, usr.getName());
+            stmt.setString(4, usr.getSurname());
+            
+
+            int rows = stmt.executeUpdate();
+
+            return rows == 1;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Db.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return false;
+    }
+    
     public boolean updateForm(Form f) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -522,6 +563,8 @@ public class Db {
                 user.setId(set.getInt("id"));
                 user.setUsername(set.getString("username"));
                 user.setPassword(set.getString("password"));
+                user.setName(set.getString("firstname"));
+                user.setSurname(set.getString("surname"));
             }
 
         } catch (SQLException ex) {

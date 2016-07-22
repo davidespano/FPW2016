@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Db;
 import model.User;
 
@@ -39,6 +40,7 @@ public class Register extends HttpServlet {
             String cmd = request.getParameter("cmd");
             if(cmd.equals("checkUsername")){
                 // ho ricevuto una chiamata ajax
+                // per controllare lo username
                 boolean ok = false;
                 
                 User usr = Db.getInstance().getUserByUsername(
@@ -50,6 +52,26 @@ public class Register extends HttpServlet {
                 
                 request.getRequestDispatcher("jsp/checkUserJson.jsp")
                         .forward(request, response);
+                return;
+            }
+            if(cmd.equals("registration")){
+                User usr = new User();
+                usr.setUsername(request.getParameter("username"));
+                usr.setPassword(request.getParameter("password1"));
+                usr.setSurname(request.getParameter("surname"));
+                usr.setName(request.getParameter("name"));
+                
+                // inserisco l'utente nel db
+                Db.getInstance().createUser(usr);
+                
+                // lo ricerco immediatamente per avere il valore dell'id 
+                // generato dal db
+                usr = Db.getInstance().getUserVer2(usr.getUsername(), usr.getPassword());
+                
+                // faccio la login in automatico
+                HttpSession session = request.getSession();
+                session.setAttribute("user", usr);
+                response.sendRedirect("formList.html");
                 return;
             }
         }

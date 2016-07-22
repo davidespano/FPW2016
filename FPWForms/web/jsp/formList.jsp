@@ -24,7 +24,7 @@
             <jsp:include page="include/sidebar2.jsp" />
             
             <div class="content">
-                <h1>Benvenuto ${user.getUsername()}</h1>
+                <h1>Benvenuto ${user.getName()}</h1>
                 
                 <h2>I miei form</h2>
                 <ul>
