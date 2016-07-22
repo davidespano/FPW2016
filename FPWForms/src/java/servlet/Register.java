@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
                 
                 request.getRequestDispatcher("jsp/checkUserJson.jsp")
                         .forward(request, response);
-                
+                return;
             }
         }
         

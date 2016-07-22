@@ -60,7 +60,7 @@
                             Posizione nel questionario
                         </label>
                         <input id="questionOrder${question.getId()}" 
-                               type="number" name="questionTitle" 
+                               type="number" name="questionOrder" 
                                value="${question.getOrder()}"
                                class="largeInput"/>
 

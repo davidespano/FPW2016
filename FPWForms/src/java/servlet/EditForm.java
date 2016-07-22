@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Db;
 import model.Form;
+import model.Option;
+import model.Question;
 import model.User;
 
 /**
@@ -53,14 +55,43 @@ public class EditForm extends HttpServlet {
             
             if(request.getParameter("cmd") != null){
                 String cmd = request.getParameter("cmd");
-                if(cmd.equals("formTitle")){
+                if(cmd.equals("saveForm")){
                     // l'utente ha premuto il pulsante per modificare
                     // i dati del form (il titolo). Effettuo l'update
                     // sul database
                     Form f = new Form();
                     f.setId(formId);
                     f.setTitle(request.getParameter("formTitle"));
+                    Db.getInstance().updateForm(f);
                     
+                }else if(cmd.equals("saveQuestion")){
+                    // l'utente ha premuto il pulsante per
+                    // salvare le modifiche ad una domanda
+                    // contenuta nel form
+                    // N.B. andrebbe controllato che tutti i parametri 
+                    // della richiesta siano diversi da null
+                    
+                    Question q = new Question();
+                    q.setTitle(request.getParameter("questionTitle"));
+                    q.setId(Integer.parseInt(
+                            request.getParameter("questionId")));
+                    q.setOrder(Integer.parseInt(
+                            request.getParameter("questionOrder")));
+                    q.setType(Integer.parseInt(
+                            request.getParameter("questionType")));
+                    Db.getInstance().updateQuestion(q);
+                    
+                }else if(cmd.equals("saveOption")){
+                    // l'utente ha premuto il pulsante per salvare le
+                    // modifiche ad una opzione
+                    // N.B. andrebbe controllato che tutti i parametri 
+                    // della richiesta siano diversi da null
+                    
+                    Option o = new Option();
+                    o.setValue(request.getParameter("optionValue"));
+                    o.setId(Integer.parseInt(
+                            request.getParameter("optionId")));
+                    Db.getInstance().updateOption(o);
                 }
             }
             

@@ -14,6 +14,12 @@
                 Logout
             </a>
         </li>
+        <li>
+            <a href="formList.html" 
+               title="Visualizza l'elenco dei form">
+                Elenco dei form
+            </a>
+        </li>
         <li> 
             <a href="http://people.unica.it/davidespano/" target="_blank" 
                title="selezionalo per aprire la pagina su un nuovo tab">

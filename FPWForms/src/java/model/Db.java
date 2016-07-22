@@ -86,7 +86,7 @@ public class Db {
         return false;
     }
     
-    public boolean updateQuestion(Form f){
+    public boolean updateOption(Option o){
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -94,7 +94,56 @@ public class Db {
                     dbConnectionUrl,
                     dbConnectionUser,
                     dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                    "update qOption set " +
+                    "ovalue = ? where id = ? "
+            );
             
+            stmt.setString(1, o.getValue());
+            stmt.setInt(2, o.getId());
+            
+            int rows = stmt.executeUpdate();
+            
+            return rows == 1;
+            
+        }catch (SQLException ex) {
+            Logger.getLogger(Db.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                if(stmt != null){
+                    stmt.close();
+                }
+
+                if(conn != null){
+                    conn.close();
+                }
+            } catch(SQLException ex){
+                Logger.getLogger(Db.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean updateQuestion(Question q){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(
+                    dbConnectionUrl,
+                    dbConnectionUser,
+                    dbConnectionPsw);
+            stmt = conn.prepareStatement(
+                    "update question set " +
+                    "title = ?, qtype = ?, qorder= ? " +
+                    "where id = ?"
+            );
+            
+            stmt.setString(1, q.getTitle());
+            stmt.setInt(2, q.getType());
+            stmt.setInt(3, q.getOrder());
+            stmt.setInt(4, q.getId());
             
             int rows = stmt.executeUpdate();
             
@@ -231,7 +280,8 @@ public class Db {
                     "from form \n" +
                     "join question on form.id = question.FORM_ID " +
                     "join qOption on qOption.QUESTION_ID = question.id " +
-                    "where form.id = ?");
+                    "where form.id = ? " +
+                    "order by question.qOrder");
             stmt.setInt(1, id);
             List<Form> forms = getFormBySql(stmt, conn);
             
